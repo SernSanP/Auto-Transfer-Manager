@@ -6,7 +6,7 @@ import {
   IsNumber,
 } from 'class-validator';
 
-export class CreateTransactionDto {
+export class UpdateTransactionDto {
   @IsNotEmpty()
   // @IsInt()
   transaction_group_id: string;

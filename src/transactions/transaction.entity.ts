@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { TransactionGroup } from 'src/transaction-groups/transaction-group.entity';
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Transaction {
@@ -73,5 +74,12 @@ export class Transaction {
 
   // @Column()
   // is_deleted: string;
+
+  // @ManyToOne(
+  //   _type => TransactionGroup,
+  //   TransactionGroup => TransactionGroup.transaction,
+  //   { eager: false },
+  // )
+  transactiongroup: TransactionGroup;
 }
 //this is a test
