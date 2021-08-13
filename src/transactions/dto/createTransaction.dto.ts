@@ -4,72 +4,72 @@ import {
   IsInt,
   IsNotEmpty,
   IsNumber,
+  IsString,
 } from 'class-validator';
 
 export class CreateTransactionDto {
   @IsNotEmpty()
-  // @IsInt()
+  @IsString()
   transaction_group_id: string;
 
-  // @IsNotEmpty()
-  // session_id: string;
+  @IsNotEmpty()
+  session_id: string;
 
-  // api_transaction_id: string;
+  api_transaction_id: string;
 
-  // @IsNotEmpty()
-  // source_system_name: string;
+  @IsNotEmpty()
+  source_system_name: string;
 
-  // @IsNotEmpty()
-  // @IsInt()
-  // user_id: string;
+  @IsNotEmpty()
+  @IsInt()
+  user_id: number;
 
-  // @IsNotEmpty()
-  // user_first_name: string;
+  @IsNotEmpty()
+  user_first_name: string;
 
-  // @IsNotEmpty()
-  // user_last_name: string;
+  @IsNotEmpty()
+  user_last_name: string;
 
-  // @IsInt()
-  // payer_id: string;
+  @IsString()
+  payer_id: string;
 
-  // payer_bank_abbr: string;
+  payer_bank_abbr: string;
 
-  // payer_bank_account: string;
+  payer_bank_account: string;
 
-  // payer_msisdn: string;
+  payer_msisdn: string;
 
-  // @IsNotEmpty()
-  // payee_bank_abbr: string;
+  @IsNotEmpty()
+  payee_bank_abbr: string;
 
-  // @IsNotEmpty()
-  // payee_bank_account: string;
+  @IsNotEmpty()
+  payee_bank_account: string;
 
-  // @IsNotEmpty()
-  // @IsNumber()
-  // amount: string;
+  @IsNotEmpty()
+  @IsNumber()
+  amount: number;
 
-  // @IsNumber()
-  // actual_amount: string;
+  @IsNumber()
+  actual_amount: number;
 
-  // @IsNotEmpty()
-  // payee_name: string;
+  @IsNotEmpty()
+  payee_name: string;
 
-  // response_payee_name: string;
-
-  // @IsDate()
-  // transferred_at: string;
+  response_payee_name: string;
 
   // @IsDate()
-  // sms_verified_at: string;
+  // transferred_at: Date;
 
-  // status_code: string;
+  // @IsDate()
+  // sms_verified_at: Date;
 
-  // status_type: string;
+  status_code: string;
 
-  // status_message: string;
+  status_type: string;
 
-  // @IsBoolean()
-  // @IsNotEmpty()
-  // is_deleted: string;
+  status_message: string;
+
+  @IsBoolean()
+  @IsNotEmpty()
+  is_deleted: boolean;
 }
-//this is a test

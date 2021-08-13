@@ -21,7 +21,8 @@ export class TransactionsController {
   }
 
   @Get()
-  getTransactionGroups(): Promise<Transaction[]> {
+  getTransaction(): Promise<Transaction[]> {
+    console.log('haha')
     return this.transactionsService.getTransactions();
   }
 

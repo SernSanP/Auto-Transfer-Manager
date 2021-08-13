@@ -25,7 +25,9 @@ export class TransactionGroupsService {
   }
 
   getTransactionGroups(): Promise<TransactionGroup[]> {
-    return this.transactionGroupsRepository.find();
+    return this.transactionGroupsRepository.find({
+      relations: ['transaction'],
+    });
   }
 
   async updateTransactionGroup(

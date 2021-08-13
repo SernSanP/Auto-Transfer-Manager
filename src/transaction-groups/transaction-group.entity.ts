@@ -1,5 +1,11 @@
 import { Transaction } from 'src/transactions/transaction.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class TransactionGroup {
@@ -7,12 +13,12 @@ export class TransactionGroup {
   id: string;
 
   @Column()
-  is_running: string;
+  is_running: boolean;
 
-  // @OneToMany(
-  //   _type => Transaction,
-  //   Transaction => Transaction.transactiongroup,
-  //   { eager: true },
-  // )
+  @OneToMany(
+    () => Transaction,
+    transaction => transaction.transactiongroup,
+  )
+  @JoinColumn({ name: 'id' })
   transaction: Transaction[];
 }

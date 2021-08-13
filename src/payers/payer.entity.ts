@@ -1,5 +1,11 @@
 import { Transaction } from 'src/transactions/transaction.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export class Payer {
@@ -7,7 +13,7 @@ export class Payer {
   id: string;
 
   @Column()
-  created_user_id: string;
+  created_user_id: number;
 
   @Column()
   source_system_name: string;
@@ -22,12 +28,12 @@ export class Payer {
   payer_msisdn: string;
 
   @Column()
-  is_disabled: string;
+  is_disabled: boolean;
 
-  //   @OneToMany(
-  //     _type => Transaction,
-  //     Transaction => Transaction.payer,
-  //     { eager: false },
-  //   )
+  @OneToMany(
+    () => Transaction,
+    Transaction => Transaction.payer,
+  )
+  @JoinColumn({ name: 'id' })
   transaction: Transaction;
 }
