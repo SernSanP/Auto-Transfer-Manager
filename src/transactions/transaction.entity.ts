@@ -1,3 +1,4 @@
+import { Payer } from 'src/payers/payer.entity';
 import { TransactionGroup } from 'src/transaction-groups/transaction-group.entity';
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -81,5 +82,12 @@ export class Transaction {
   //   { eager: false },
   // )
   transactiongroup: TransactionGroup;
+
+  // @ManyToOne(
+  //   _type => Payer,
+  //   Payer => Payer.transaction,
+  //   { eager: true },
+  // )
+  payer: Payer;
 }
 //this is a test
