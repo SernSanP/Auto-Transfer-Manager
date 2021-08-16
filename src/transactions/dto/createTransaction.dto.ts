@@ -1,6 +1,4 @@
 import {
-  IsBoolean,
-  IsDate,
   IsInt,
   IsNotEmpty,
   IsNumber,
@@ -69,7 +67,4 @@ export class CreateTransactionDto {
 
   status_message: string;
 
-  @IsBoolean()
-  @IsNotEmpty()
-  is_deleted: boolean;
 }

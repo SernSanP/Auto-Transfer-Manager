@@ -1,4 +1,4 @@
-import { IsBoolean, IsInt, IsNotEmpty } from 'class-validator';
+import { IsInt, IsNotEmpty } from 'class-validator';
 
 export class CreatePayerDto {
   @IsNotEmpty()
@@ -17,7 +17,4 @@ export class CreatePayerDto {
   @IsNotEmpty()
   payer_msisdn: string;
 
-  @IsNotEmpty()
-  @IsBoolean()
-  is_disabled: boolean;
 }

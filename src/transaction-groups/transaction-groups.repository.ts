@@ -7,9 +7,9 @@ export class TransactionGroupsRepository extends Repository<TransactionGroup> {
   async createTransactionGroup(
     createTransactionGroupDto: CreateTransactionGroupDto,
   ): Promise<TransactionGroup> {
-    const { is_running } = createTransactionGroupDto;
+    const {} = createTransactionGroupDto;
     const transactiongroup = this.create({
-      is_running,
+      is_running: true,
     });
     await this.save(transactiongroup);
     return transactiongroup;

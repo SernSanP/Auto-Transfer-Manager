@@ -30,7 +30,6 @@ export class TransactionsRepository extends Repository<Transaction> {
       status_code,
       status_type,
       status_message,
-      is_deleted,
     } = createTransactionDto;
     const transaction = this.create({
       transaction_group_id,
@@ -55,7 +54,7 @@ export class TransactionsRepository extends Repository<Transaction> {
       status_code,
       status_type,
       status_message,
-      is_deleted,
+      is_deleted: false,
     });
     await this.save(transaction);
     return transaction;

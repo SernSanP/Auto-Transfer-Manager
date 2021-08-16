@@ -11,7 +11,6 @@ export class PayersRepository extends Repository<Payer> {
       payer_bank_abbr,
       payer_bank_account,
       payer_msisdn,
-      is_disabled,
     } = createPayerDto;
 
     const payer = this.create({
@@ -20,7 +19,7 @@ export class PayersRepository extends Repository<Payer> {
       payer_bank_abbr,
       payer_bank_account,
       payer_msisdn,
-      is_disabled,
+      is_disabled: false,
     });
     await this.save(payer);
     return payer;
