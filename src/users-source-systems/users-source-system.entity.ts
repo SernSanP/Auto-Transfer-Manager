@@ -28,7 +28,7 @@ export class UsersSourceSystem {
   @Exclude({ toPlainOnly: true })
   user:User;
 
-  @ManyToOne((_type) => SourceSystem, (sourceSystem) => sourceSystem.usersSourceSystems, { eager: false })
-  @Exclude({ toPlainOnly: true })
-  sourceSystem:SourceSystem;
+  // @ManyToOne((_type) => SourceSystem, (sourceSystem) => sourceSystem.usersSourceSystems)
+  // @Exclude({ toPlainOnly: true })
+  // sourceSystem:SourceSystem;
 }
