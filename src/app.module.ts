@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionGroupsModule } from './transaction-groups/transaction-groups.module';
 import { PayersModule } from './payers/payers.module';
+import { TransferModule } from './transfer/transfer.module';
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { PayersModule } from './payers/payers.module';
     TransactionGroupsModule,
     PayersModule,
     TransactionsModule,
+    TransferModule,
   ],
 })
 export class AppModule {}

@@ -8,5 +8,6 @@ import { PayersService } from './payers.service';
   imports: [TypeOrmModule.forFeature([PayersRepository])],
   controllers: [PayersController],
   providers: [PayersService],
+  exports: [PayersService]
 })
 export class PayersModule {}

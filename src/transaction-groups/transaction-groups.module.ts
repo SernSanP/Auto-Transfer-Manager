@@ -8,5 +8,6 @@ import { TransactionGroupsRepository } from './transaction-groups.repository';
   imports: [TypeOrmModule.forFeature([TransactionGroupsRepository])],
   providers: [TransactionGroupsService],
   controllers: [TransactionGroupsController],
+  exports: [TransactionGroupsService],
 })
 export class TransactionGroupsModule {}
