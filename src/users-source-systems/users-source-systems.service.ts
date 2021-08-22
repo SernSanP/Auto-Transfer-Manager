@@ -36,8 +36,15 @@ export class UsersSourceSystemsService {
     return this.usersRepository.createUser(createUserDto);
   }
 
-  async updateUserInfo(id:string, updateUserInfoDto: UpdateUserInfoDto): Promise<UsersSourceSystem>{
-    const { source_system_name, limit_balance_per_transaction, limit_balance_per_day } = updateUserInfoDto
+  async updateUserInfo(
+    id: string,
+    updateUserInfoDto: UpdateUserInfoDto,
+  ): Promise<UsersSourceSystem> {
+    const {
+      source_system_name,
+      limit_balance_per_transaction,
+      limit_balance_per_day,
+    } = updateUserInfoDto;
     const user = await this.getUserById(id);
     user.source_system_name = source_system_name;
     user.limit_balance_per_transaction = limit_balance_per_transaction;

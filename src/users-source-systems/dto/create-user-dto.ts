@@ -1,11 +1,10 @@
 import { IsNotEmpty } from 'class-validator';
-import { Role } from '../user-role.enum';
+import { Role } from '../../Roles/role.enum';
 
 export class CreateUserDto {
-    @IsNotEmpty()
-    source_system_name: string;
-  
-    @IsNotEmpty()
-    role: Role;
-  
+  @IsNotEmpty()
+  source_system_name: string;
+
+  @IsNotEmpty()
+  role: Role;
 }

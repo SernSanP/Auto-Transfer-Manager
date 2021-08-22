@@ -3,7 +3,10 @@ import { CreateUserDto } from './dto/create-user-dto';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { User } from './user.entity';
 import * as bcrypt from 'bcrypt';
-import { ConflictException, InternalServerErrorException } from '@nestjs/common';
+import {
+  ConflictException,
+  InternalServerErrorException,
+} from '@nestjs/common';
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
@@ -26,7 +29,7 @@ export class UsersRepository extends Repository<User> {
     return users;
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<void> {
+  async createUser(createUserDto: CreateUserDto): Promise<string> {
     const { email, password, first_name, last_name } = createUserDto;
 
     const salt = await bcrypt.genSalt();
@@ -50,5 +53,6 @@ export class UsersRepository extends Repository<User> {
         throw new InternalServerErrorException();
       }
     }
+    return user.id;
   }
 }

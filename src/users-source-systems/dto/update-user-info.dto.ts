@@ -5,7 +5,7 @@ export class UpdateUserInfoDto {
   @IsInt()
   source_system_name?: string;
 
-  @IsOptional() li;
+  @IsOptional()
   @IsInt()
   limit_balance_per_transaction?: number;
 

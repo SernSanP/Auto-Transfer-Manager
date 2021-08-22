@@ -13,6 +13,8 @@ import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user-dto';
 import { UpdateUserInfoDto } from './dto/update-user-info.dto';
+import { Roles } from 'src/Roles/roles.decorator';
+import { Role } from 'src/Roles/role.enum';
 
 @Controller('users')
 export class UsersController {
@@ -28,7 +30,7 @@ export class UsersController {
   }
 
   @Post()
-  createUsers(@Body() createUserDto: CreateUserDto): Promise<void> {
+  createUsers(@Body() createUserDto: CreateUserDto): Promise<string> {
     return this.usersService.createUser(createUserDto);
   }
 

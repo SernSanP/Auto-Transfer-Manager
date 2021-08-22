@@ -1,6 +1,12 @@
 import { User } from 'src/users/user.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { Role } from './user-role.enum';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Role } from '../Roles/role.enum';
 import { Exclude } from 'class-transformer';
 import { SourceSystem } from 'src/source-systems/source-system.entity';
 
@@ -24,11 +30,19 @@ export class UsersSourceSystem {
   @Column()
   is_blocked: boolean;
 
-  @ManyToOne((_type) => User, (user) => user.usersSourceSystems, { eager: false })
+  @ManyToOne((_type) => User, (user) => user.usersSourceSystems, {
+    eager: false,
+  })
+  @JoinColumn({ name: 'id' })
   @Exclude({ toPlainOnly: true })
-  user:User;
+  user: User;
 
-  // @ManyToOne((_type) => SourceSystem, (sourceSystem) => sourceSystem.usersSourceSystems)
-  // @Exclude({ toPlainOnly: true })
-  // sourceSystem:SourceSystem;
+  @ManyToOne(
+    (_type) => SourceSystem,
+    (sourceSystem) => sourceSystem.usersSourceSystems,
+    { eager: false },
+  )
+  @JoinColumn({ name: 'source_system_name' })
+  @Exclude({ toPlainOnly: true })
+  sourceSystem: SourceSystem;
 }

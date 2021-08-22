@@ -1,9 +1,5 @@
-import {
-  IsBoolean,
-  IsOptional,
-  IsString,
-} from 'class-validator';
-import { Role } from '../user-role.enum';
+import { IsBoolean, IsOptional, IsString } from 'class-validator';
+import { Role } from '../../Roles/role.enum';
 
 export class GetUsersFilterDto {
   @IsOptional()
@@ -11,7 +7,7 @@ export class GetUsersFilterDto {
 
   @IsOptional()
   @IsBoolean()
-  is_blocked?:boolean
+  is_blocked?: boolean;
 
   @IsOptional()
   @IsString()

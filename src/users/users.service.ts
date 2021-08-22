@@ -32,7 +32,7 @@ export class UsersService {
     return user;
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<void> {
+  async createUser(createUserDto: CreateUserDto): Promise<string> {
     return this.usersRepository.createUser(createUserDto);
   }
 

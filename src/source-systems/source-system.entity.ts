@@ -12,6 +12,6 @@ export class SourceSystem {
   @Column()
   is_disabled: boolean;
 
-  // @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.sourceSystem, { eager: true })
-  // usersSourceSystems: UsersSourceSystem[];
+  @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.sourceSystem, { eager: true })
+  usersSourceSystems: UsersSourceSystem[];
 }
