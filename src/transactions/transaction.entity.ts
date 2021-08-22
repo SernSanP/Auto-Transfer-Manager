@@ -82,14 +82,14 @@ export class Transaction {
   @Column()
   is_deleted: boolean;
 
-  @ManyToOne(
-    () => TransactionGroup,
-    (transactiongroup) => transactiongroup.transaction,
-  )
-  @JoinColumn({ name: 'transaction_group_id' })
-  transactiongroup: TransactionGroup;
+  // @ManyToOne(
+  //   () => TransactionGroup,
+  //   (transactiongroup) => transactiongroup.transaction,
+  // )
+  // @JoinColumn({ name: 'transaction_group_id' })
+  // transactiongroup: TransactionGroup;
 
-  @ManyToOne(() => Payer, (Payer) => Payer.transaction)
-  @JoinColumn({ name: 'payer_id' })
-  payer: Payer;
+  // @ManyToOne(() => Payer, (Payer) => Payer.transaction)
+  // @JoinColumn({ name: 'payer_id' })
+  // payer: Payer;
 }
