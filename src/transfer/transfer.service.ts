@@ -7,7 +7,7 @@ import { UsersService } from 'src/users/users.service';
 import { CreateTransferDto } from './dto/createTransfer.dto';
 import { Transfer } from './transfer.entity';
 
-interface Response {
+interface ServerResponse {
   status: { code: string; type: string; error_type; message: string };
   data: { transaction_id: string };
 }
@@ -61,12 +61,12 @@ export class TransferService {
       },
       data: {
         session: '00000000-0000-0000-0000-000000000000',
-        payer_bank: 'SCB',
-        payer_account: '0000000001',
-        payer_msisdn: '+66810000001',
-        payee_bank: 'KBNK',
-        payee_account: '1000000001',
-        amount: 10,
+        payer_bank: transaction.payer_bank_abbr,
+        payer_account: transaction.payer_bank_account,
+        payer_msisdn: transaction.payer_msisdn,
+        payee_bank: transaction.payee_bank_abbr,
+        payee_account: transaction.payee_bank_account,
+        amount: transaction.amount,
         callback_url: 'http://127.0.0.1:4040',
       },
     });

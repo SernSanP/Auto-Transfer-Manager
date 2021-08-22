@@ -24,6 +24,6 @@ export class User {
   @Column()
   is_blocked: boolean;
 
-  @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.user, { eager: true })
-  usersSourceSystems: UsersSourceSystem[];
+  // @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.user, { eager: true })
+  // usersSourceSystems: UsersSourceSystem[];
 }

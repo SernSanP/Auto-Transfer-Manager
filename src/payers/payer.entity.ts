@@ -13,7 +13,7 @@ export class Payer {
   id: string;
 
   @Column()
-  created_user_id: number;
+  created_user_id: string;
 
   @Column()
   source_system_name: string;

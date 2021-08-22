@@ -24,9 +24,9 @@ export class UsersSourceSystem {
   @Column()
   is_blocked: boolean;
 
-  @ManyToOne((_type) => User, (user) => user.usersSourceSystems, { eager: false })
-  @Exclude({ toPlainOnly: true })
-  user:User;
+  // @ManyToOne((_type) => User, (user) => user.usersSourceSystems, { eager: false })
+  // @Exclude({ toPlainOnly: true })
+  // user:User;
 
   // @ManyToOne((_type) => SourceSystem, (sourceSystem) => sourceSystem.usersSourceSystems)
   // @Exclude({ toPlainOnly: true })
