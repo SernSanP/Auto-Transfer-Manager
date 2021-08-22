@@ -9,7 +9,9 @@ export class TransferController {
   constructor(private transferService: TransferService) {}
 
   @Post()
-  createTransfer(@Body() createTransferDto: CreateTransferDto) {
+  createTransfer(
+    @Body() createTransferDto: CreateTransferDto,
+  ): Promise<ServerResponse> {
     const { payee_bank_abbr } = createTransferDto;
     const res = getBankFromAbbr(payee_bank_abbr);
     if (!res) {

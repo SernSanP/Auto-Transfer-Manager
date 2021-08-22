@@ -7,11 +7,6 @@ import { UsersService } from 'src/users/users.service';
 import { CreateTransferDto } from './dto/createTransfer.dto';
 import { Transfer } from './transfer.entity';
 
-interface ServerResponse {
-  status: { code: string; type: string; error_type; message: string };
-  data: { transaction_id: string };
-}
-
 @Injectable()
 export class TransferService {
   constructor(
