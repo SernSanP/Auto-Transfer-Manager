@@ -62,7 +62,7 @@ export class TransferService {
       {
         headers: {
           apikey: '013ba1c9-6cb2-4891-a523-950a25d1a712',
-          ['source-system-name']: 'ssn_test',
+          ['source-system-name']: transaction.source_system_name,
         },
       },
     );
