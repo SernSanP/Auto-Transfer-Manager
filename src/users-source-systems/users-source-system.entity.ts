@@ -4,19 +4,38 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
 } from 'typeorm';
 import { Role } from '../Roles/role.enum';
-import { Exclude } from 'class-transformer';
 import { SourceSystem } from 'src/source-systems/source-system.entity';
-
+import { Exclude } from 'class-transformer';
 @Entity()
 export class UsersSourceSystem {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryColumn()
   id: string;
+  // @ManyToOne((_type) => User, (user) => user.users)
+  // @JoinColumn({ name: 'id' })
+  // @Exclude({toPlainOnly: true})
+  // user: User;
+
+  @PrimaryColumn()
+  source_system_name: string;
+  // @ManyToOne(
+  //   (_type) => SourceSystem,
+  //   (sourceSystem) => sourceSystem.sourceSystems,
+  //   { eager: false },
+  // )
+  // @JoinColumn({ name: 'source_system_name' })
+  // @Exclude({toPlainOnly: true})
+  // sourceSystem: SourceSystem;
 
   @Column()
-  source_system_name: string;
+  created_user_id: string;
+  // @ManyToOne((_type) => User, (user) => user.createdUsers, {
+  //   eager: false,
+  // })
+  // @JoinColumn({ name: 'created_user_id' })
+  // createdUser: User;
 
   @Column()
   role: Role;
@@ -29,20 +48,4 @@ export class UsersSourceSystem {
 
   @Column()
   is_blocked: boolean;
-
-  @ManyToOne((_type) => User, (user) => user.usersSourceSystems, {
-    eager: false,
-  })
-  @JoinColumn({ name: 'id' })
-  @Exclude({ toPlainOnly: true })
-  user: User;
-
-  @ManyToOne(
-    (_type) => SourceSystem,
-    (sourceSystem) => sourceSystem.usersSourceSystems,
-    { eager: false },
-  )
-  @JoinColumn({ name: 'source_system_name' })
-  @Exclude({ toPlainOnly: true })
-  sourceSystem: SourceSystem;
 }

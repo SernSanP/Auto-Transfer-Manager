@@ -1,5 +1,5 @@
 import { UsersSourceSystem } from 'src/users-source-systems/users-source-system.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class SourceSystem {
@@ -12,6 +12,6 @@ export class SourceSystem {
   @Column()
   is_disabled: boolean;
 
-  @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.sourceSystem, { eager: true })
-  usersSourceSystems: UsersSourceSystem[];
+  // @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.sourceSystem, { eager: true })
+  // sourceSystems: UsersSourceSystem[];
 }

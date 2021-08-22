@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
@@ -15,8 +16,10 @@ import { CreateUserDto } from './dto/create-user-dto';
 import { UpdateUserInfoDto } from './dto/update-user-info.dto';
 import { Roles } from 'src/Roles/roles.decorator';
 import { Role } from 'src/Roles/role.enum';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
+@UseGuards(AuthGuard())
 export class UsersController {
   constructor(private usersService: UsersService) {}
   @Get()

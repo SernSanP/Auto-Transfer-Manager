@@ -1,5 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/user.entity';
 import { CreateUserDto } from './dto/create-user-dto';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { UpdateUserInfoDto } from './dto/update-user-info.dto';
@@ -13,8 +14,11 @@ export class UsersSourceSystemsService {
     private usersRepository: UsersSourceSystemsRepository,
   ) {}
 
-  getUsers(filterDto: GetUsersFilterDto): Promise<UsersSourceSystem[]> {
-    return this.usersRepository.getUsers(filterDto);
+  getUsers(
+    filterDto: GetUsersFilterDto,
+    user: User,
+  ): Promise<UsersSourceSystem[]> {
+    return this.usersRepository.getUsers(filterDto, user);
   }
 
   async getUserById(id: string): Promise<UsersSourceSystem> {
@@ -32,8 +36,11 @@ export class UsersSourceSystemsService {
     return user;
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<UsersSourceSystem> {
-    return this.usersRepository.createUser(createUserDto);
+  async createUser(
+    createUserDto: CreateUserDto,
+    user: User,
+  ): Promise<UsersSourceSystem> {
+    return this.usersRepository.createUser(createUserDto, user);
   }
 
   async updateUserInfo(

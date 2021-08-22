@@ -7,6 +7,8 @@ import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionGroupsModule } from './transaction-groups/transaction-groups.module';
 import { PayersModule } from './payers/payers.module';
 import { SourceSystemsModule } from './source-systems/source-systems.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './Roles/roles.guard';
 
 @Module({
   imports: [
@@ -28,5 +30,11 @@ import { SourceSystemsModule } from './source-systems/source-systems.module';
     PayersModule,
     TransactionsModule,
   ],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    }
+  ]
 })
 export class AppModule {}

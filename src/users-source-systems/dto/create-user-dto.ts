@@ -3,7 +3,7 @@ import { Role } from '../../Roles/role.enum';
 
 export class CreateUserDto {
   @IsNotEmpty()
-  source_system_name: string;
+  created_user_id: string;
 
   @IsNotEmpty()
   role: Role;
