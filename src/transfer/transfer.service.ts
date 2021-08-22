@@ -52,14 +52,9 @@ export class TransferService {
       amount,
       payee_name,
     });
-    const respone = await axios({
-      method: 'post',
-      url: 'https://services.missilegroup.com/autotransfer-test/transfer',
-      headers: {
-        apikey: '013ba1c9-6cb2-4891-a523-950a25d1a712',
-        ['source-system-name']: 'ssn_test',
-      },
-      data: {
+    const respone = await axios.post<ServerResponse>(
+      'https://services.missilegroup.com/autotransfer-test/transfer',
+      {
         session: '00000000-0000-0000-0000-000000000000',
         payer_bank: transaction.payer_bank_abbr,
         payer_account: transaction.payer_bank_account,
@@ -69,14 +64,20 @@ export class TransferService {
         amount: transaction.amount,
         callback_url: 'http://127.0.0.1:4040',
       },
-    });
+      {
+        headers: {
+          apikey: '013ba1c9-6cb2-4891-a523-950a25d1a712',
+          ['source-system-name']: 'ssn_test',
+        },
+      },
+    );
 
     this.transactionsService.updateTransaction(
       {
-        api_transaction_id: respone.data.transaction_id,
-        status_code: 'a',
-        status_type: 'a',
-        status_message: 'a',
+        api_transaction_id: respone.data.data.transaction_id,
+        status_code: respone.data.status.code,
+        status_type: respone.data.status.type,
+        status_message: respone.data.status.message,
       },
       transaction.id,
     );
