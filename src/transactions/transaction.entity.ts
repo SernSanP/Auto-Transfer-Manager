@@ -19,14 +19,14 @@ export class Transaction {
   @Column()
   session_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   api_transaction_id: string;
 
   @Column()
   source_system_name: string;
 
   @Column()
-  user_id: number;
+  user_id: string;
 
   @Column()
   user_first_name: string;
@@ -55,45 +55,41 @@ export class Transaction {
   @Column()
   amount: number;
 
-  @Column()
+  @Column({ nullable: true })
   actual_amount: number;
 
   @Column()
   payee_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   response_payee_name: string;
 
-  // @Column()
-  // transferred_at: Date;
+  @Column({ nullable: true })
+  transferred_at: Date;
 
-  // @Column()
-  // sms_verified_at: Date;
+  @Column({ nullable: true })
+  sms_verified_at: Date;
 
-  @Column()
+  @Column({ nullable: true })
   status_code: string;
 
-  @Column()
+  @Column({ nullable: true })
   status_type: string;
 
-  @Column()
+  @Column({ nullable: true })
   status_message: string;
 
   @Column()
   is_deleted: boolean;
 
-  @ManyToOne(
-    () => TransactionGroup,
-    transactiongroup => transactiongroup.transaction,
-  )
-  @JoinColumn({ name: 'transaction_group_id' })
-  transactiongroup: TransactionGroup;
+  // @ManyToOne(
+  //   () => TransactionGroup,
+  //   (transactiongroup) => transactiongroup.transaction,
+  // )
+  // @JoinColumn({ name: 'transaction_group_id' })
+  // transactiongroup: TransactionGroup;
 
-  @ManyToOne(
-    () => Payer,
-    Payer => Payer.transaction,
-  )
-  @JoinColumn({ name: 'payer_id' })
-  payer: Payer;
+  // @ManyToOne(() => Payer, (Payer) => Payer.transaction)
+  // @JoinColumn({ name: 'payer_id' })
+  // payer: Payer;
 }
-//this is a test

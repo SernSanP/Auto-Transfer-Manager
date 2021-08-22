@@ -1,9 +1,9 @@
-import { IsInt, IsNotEmpty } from 'class-validator';
+import { IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class CreatePayerDto {
   @IsNotEmpty()
-  @IsInt()
-  created_user_id: number;
+  @IsString()
+  created_user_id: string;
 
   @IsNotEmpty()
   source_system_name: string;
@@ -16,5 +16,4 @@ export class CreatePayerDto {
 
   @IsNotEmpty()
   payer_msisdn: string;
-
 }

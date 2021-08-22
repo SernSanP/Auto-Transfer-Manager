@@ -9,6 +9,7 @@ import { PayersModule } from './payers/payers.module';
 import { SourceSystemsModule } from './source-systems/source-systems.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './Roles/roles.guard';
+import { TransferModule } from './transfer/transfer.module';
 
 @Module({
   imports: [
@@ -29,6 +30,8 @@ import { RolesGuard } from './Roles/roles.guard';
     TransactionGroupsModule,
     PayersModule,
     TransactionsModule,
+    TransferModule,
+    SourceSystemsModule,
   ],
   providers: [
     {

@@ -13,7 +13,7 @@ export class Payer {
   id: string;
 
   @Column()
-  created_user_id: number;
+  created_user_id: string;
 
   @Column()
   source_system_name: string;
@@ -30,10 +30,10 @@ export class Payer {
   @Column()
   is_disabled: boolean;
 
-  @OneToMany(
-    () => Transaction,
-    Transaction => Transaction.payer,
-  )
-  @JoinColumn({ name: 'id' })
-  transaction: Transaction;
+  // @OneToMany(
+  //   () => Transaction,
+  //   Transaction => Transaction.payer,
+  // )
+  // @JoinColumn({ name: 'id' })
+  // transaction: Transaction;
 }

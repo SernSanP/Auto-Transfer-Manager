@@ -13,14 +13,12 @@ export class CreateTransactionDto {
   @IsNotEmpty()
   session_id: string;
 
-  api_transaction_id: string;
-
   @IsNotEmpty()
   source_system_name: string;
 
   @IsNotEmpty()
-  @IsInt()
-  user_id: number;
+  @IsString()
+  user_id: string;
 
   @IsNotEmpty()
   user_first_name: string;
@@ -47,24 +45,7 @@ export class CreateTransactionDto {
   @IsNumber()
   amount: number;
 
-  @IsNumber()
-  actual_amount: number;
-
   @IsNotEmpty()
   payee_name: string;
-
-  response_payee_name: string;
-
-  // @IsDate()
-  // transferred_at: Date;
-
-  // @IsDate()
-  // sms_verified_at: Date;
-
-  status_code: string;
-
-  status_type: string;
-
-  status_message: string;
 
 }
