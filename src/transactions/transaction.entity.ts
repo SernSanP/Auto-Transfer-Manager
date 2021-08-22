@@ -52,10 +52,10 @@ export class Transaction {
   @Column()
   payee_bank_account: string;
 
-  @Column()
+  @Column({ type: 'float' })
   amount: number;
 
-  @Column({ nullable: true })
+  @Column({ nullable: true, type: 'float' }, )
   actual_amount: number;
 
   @Column()

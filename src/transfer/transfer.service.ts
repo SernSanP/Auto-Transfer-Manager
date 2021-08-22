@@ -57,7 +57,7 @@ export class TransferService {
         payee_bank: transaction.payee_bank_abbr,
         payee_account: transaction.payee_bank_account,
         amount: transaction.amount,
-        callback_url: 'http://127.0.0.1:4040',
+        callback_url: 'http://28a0-2403-6200-8821-ff5d-4db7-c125-58df-914f.ngrok.io/transfer/callback',
       },
       {
         headers: {
@@ -77,5 +77,19 @@ export class TransferService {
       transaction.id,
     );
     return respone.data;
+  }
+
+  async callbackTranfer(callbackTranferInterface: CallbackTranfer) {
+    const { status, data } = callbackTranferInterface;
+    this.transactionsService.updateTransactionCallback(
+      {
+        actual_amount: data.unique_amount,
+        response_payee_name: data.response_payee_name,
+        status_code: status.code,
+        status_type: status.type,
+        status_message: status.message,
+      },
+      data.transaction_id,
+    );
   }
 }

@@ -1,4 +1,5 @@
 import { Body, Controller, NotFoundException, Post } from '@nestjs/common';
+import { CallTracker } from 'assert';
 import { getBankFromAbbr } from './bank';
 import { CreateTransferDto } from './dto/createTransfer.dto';
 import { Transfer } from './transfer.entity';
@@ -18,5 +19,13 @@ export class TransferController {
       throw new NotFoundException();
     }
     return this.transferService.createTransfer(createTransferDto);
+  }
+
+  @Post('/callback')
+  callbackTranfer(
+    @Body() callbackTranferInterface:CallbackTranfer
+  ): void{
+    console.log(callbackTranferInterface)
+    this.transferService.callbackTranfer(callbackTranferInterface)
   }
 }
