@@ -30,10 +30,10 @@ export class Payer {
   @Column()
   is_disabled: boolean;
 
-  // @OneToMany(
-  //   () => Transaction,
-  //   Transaction => Transaction.payer,
-  // )
-  // @JoinColumn({ name: 'id' })
-  // transaction: Transaction;
+  @OneToMany(
+    () => Transaction,
+    Transaction => Transaction.payer,
+  )
+  @JoinColumn({ name: 'id' })
+  transaction: Transaction;
 }

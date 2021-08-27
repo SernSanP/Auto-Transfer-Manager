@@ -15,10 +15,10 @@ export class TransactionGroup {
   @Column()
   is_running: boolean;
 
-//   @OneToMany(
-//     () => Transaction,
-//     transaction => transaction.transactiongroup,
-//   )
-//   @JoinColumn({ name: 'id' })
-//   transaction: Transaction[];
+  @OneToMany(
+    () => Transaction,
+    transaction => transaction.transactiongroup,
+  )
+  @JoinColumn({ name: 'id' })
+  transaction: Transaction[];
 }
