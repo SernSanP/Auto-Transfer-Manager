@@ -8,15 +8,15 @@ import { TransferService } from './transfer.service';
 export class TransferController {
   constructor(private transferService: TransferService) {}
 
-  @Post()
-  createTransfer(
-    @Body() createTransferDto: CreateTransferDto,
-  ): Promise<ServerResponse> {
-    const { payee_bank_abbr } = createTransferDto;
-    const res = getBankFromAbbr(payee_bank_abbr);
-    if (!res) {
-      throw new NotFoundException();
-    }
-    return this.transferService.createTransfer(createTransferDto);
-  }
+  // @Post()
+  // createTransfer(
+  //   @Body() createTransferDto: CreateTransferDto,
+  // ): Promise<ServerResponse> {
+  //   const { payee_bank_abbr } = createTransferDto;
+  //   const res = getBankFromAbbr(payee_bank_abbr);
+  //   if (!res) {
+  //     throw new NotFoundException();
+  //   }
+  //   return this.transferService.createTransfer(createTransferDto);
+  // }
 }

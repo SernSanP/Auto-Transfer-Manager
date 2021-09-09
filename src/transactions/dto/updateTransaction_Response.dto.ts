@@ -7,8 +7,7 @@ import {
   IsString,
 } from 'class-validator';
 
-export class UpdateTransactionDto {
-  
+export class UpdateTransactionResponseDto {
   api_transaction_id: string;
 
   status_code: string;
@@ -16,5 +15,4 @@ export class UpdateTransactionDto {
   status_type: string;
 
   status_message: string;
-
 }
