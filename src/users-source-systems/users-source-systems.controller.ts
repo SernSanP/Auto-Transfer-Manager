@@ -9,28 +9,29 @@ import {
   Query,
   UseGuards,
 } from '@nestjs/common';
-import { GetUsersFilterDto } from './dto/get-users-filter.dto';
+import { GetUsersSourceSystemFilterDto } from './dto/get-users-source-system-filter.dto';
 import { UsersSourceSystem } from './users-source-system.entity';
-import { CreateUserDto } from './dto/create-user-dto';
-import { UpdateUserInfoDto } from './dto/update-user-info.dto';
+import { CreateUserSourceSystemDto } from './dto/create-user-source-system-dto';
+import { UpdateUserInfoDto } from './dto/update-user-source-system.dto';
 import { UsersSourceSystemsService } from './users-source-systems.service';
-import { Roles } from 'src/Roles/roles.decorator';
-import { RolesGuard } from 'src/Roles/roles.guard';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
 import { GetUser } from 'src/auth/get-relation.decorator';
 import { User } from 'src/users/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users-source-systems')
-@UseGuards(RolesGuard)
 @UseGuards(AuthGuard())
 export class UsersSourceSystemsController {
   constructor(private usersSourceSystemsService: UsersSourceSystemsService) {}
   @Get()
   getUsers(
-    @Query() filterDto: GetUsersFilterDto,
-    @GetUser() user: User,
+    @Query() filterDto: GetUsersSourceSystemFilterDto,
+    // @GetUser() user: User,
   ): Promise<UsersSourceSystem[]> {
-    return this.usersSourceSystemsService.getUsers(filterDto, user);
+    // if (!user.is_admin) {
+    //   return;
+    // }
+    return this.usersSourceSystemsService.getUsers(filterDto);
   }
 
   @Get('/:id')
@@ -40,10 +41,13 @@ export class UsersSourceSystemsController {
 
   @Post()
   createUsers(
-    @Body() createUserDto: CreateUserDto,
+    @Body() createUserSourceSystemDto: CreateUserSourceSystemDto,
     @GetUser() user: User,
   ): Promise<UsersSourceSystem> {
-    return this.usersSourceSystemsService.createUser(createUserDto, user);
+    return this.usersSourceSystemsService.createUser(
+      createUserSourceSystemDto,
+      user,
+    );
   }
 
   @Delete('/:id')

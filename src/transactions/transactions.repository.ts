@@ -9,7 +9,7 @@ export class TransactionsRepository extends Repository<Transaction> {
   ): Promise<Transaction> {
     const {
       transaction_group_id,
-      session_id,
+      // session_id,
       source_system_name,
       user_id,
       user_first_name,
@@ -25,7 +25,7 @@ export class TransactionsRepository extends Repository<Transaction> {
     } = createTransactionDto;
     const transaction = this.create({
       transaction_group_id,
-      session_id,
+      // session_id,
       source_system_name,
       user_id,
       user_first_name,

@@ -8,7 +8,7 @@ import { TransactionGroupsModule } from './transaction-groups/transaction-groups
 import { PayersModule } from './payers/payers.module';
 import { SourceSystemsModule } from './source-systems/source-systems.module';
 import { APP_GUARD } from '@nestjs/core';
-import { RolesGuard } from './Roles/roles.guard';
+import { RolesGuard } from './auth/roles/roles.guard';
 import { TransferModule } from './transfer/transfer.module';
 
 @Module({

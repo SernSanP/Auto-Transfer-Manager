@@ -1,9 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/users/user.entity';
-import { CreateUserDto } from './dto/create-user-dto';
-import { GetUsersFilterDto } from './dto/get-users-filter.dto';
-import { UpdateUserInfoDto } from './dto/update-user-info.dto';
+import { CreateUserSourceSystemDto } from './dto/create-user-source-system-dto';
+import { GetUsersSourceSystemFilterDto } from './dto/get-users-source-system-filter.dto';
+import { UpdateUserInfoDto } from './dto/update-user-source-system.dto';
 import { UsersSourceSystem } from './users-source-system.entity';
 import { UsersSourceSystemsRepository } from './users-source-systems.repository';
 
@@ -15,10 +15,9 @@ export class UsersSourceSystemsService {
   ) {}
 
   getUsers(
-    filterDto: GetUsersFilterDto,
-    user: User,
+    filterDto: GetUsersSourceSystemFilterDto,
   ): Promise<UsersSourceSystem[]> {
-    return this.usersRepository.getUsers(filterDto, user);
+    return this.usersRepository.getUsers(filterDto);
   }
 
   async getUserById(id: string): Promise<UsersSourceSystem> {
@@ -37,10 +36,10 @@ export class UsersSourceSystemsService {
   }
 
   async createUser(
-    createUserDto: CreateUserDto,
+    createUserSourceSystemDto: CreateUserSourceSystemDto,
     user: User,
   ): Promise<UsersSourceSystem> {
-    return this.usersRepository.createUser(createUserDto, user);
+    return this.usersRepository.createUser(createUserSourceSystemDto, user);
   }
 
   async updateUserInfo(

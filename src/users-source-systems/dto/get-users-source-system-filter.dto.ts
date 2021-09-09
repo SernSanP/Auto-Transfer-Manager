@@ -1,7 +1,7 @@
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
-import { Role } from '../../Roles/role.enum';
+import { Role } from '../../auth/roles/role.enum';
 
-export class GetUsersFilterDto {
+export class GetUsersSourceSystemFilterDto {
   @IsOptional()
   role?: Role;
 

@@ -3,6 +3,7 @@ import { TransactionGroup } from 'src/transaction-groups/transaction-group.entit
 import {
   Column,
   Entity,
+  Generated,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -17,6 +18,7 @@ export class Transaction {
   transaction_group_id: string;
 
   @Column()
+  @Generated('uuid')
   session_id: string;
 
   @Column({ nullable: true })

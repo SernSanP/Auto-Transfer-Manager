@@ -6,6 +6,8 @@ import { UsersRepository } from '../users/users.repository';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { JwtStrategy } from './jwt.strategy';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
+import { UsersSourceSystemsRepository } from 'src/users-source-systems/users-source-systems.repository';
 const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 
 @Module({
@@ -17,9 +19,9 @@ const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
         expiresIn: 3600,
       },
     }),
-    TypeOrmModule.forFeature([UsersRepository]),
+    TypeOrmModule.forFeature([UsersRepository,UsersSourceSystemsRepository]),
   ],
-  providers: [AuthService, JwtStrategy],
+  providers: [AuthService, JwtStrategy, RolesGuard],
   controllers: [AuthController],
   exports: [JwtStrategy, PassportModule],
 })

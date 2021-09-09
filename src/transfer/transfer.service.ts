@@ -1,11 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { PayersService } from 'src/payers/payers.service';
 import { TransactionGroupsService } from 'src/transaction-groups/transaction-groups.service';
 import { TransactionsService } from 'src/transactions/transactions.service';
 import { UsersService } from 'src/users/users.service';
 import { CreateTransferDto } from './dto/createTransfer.dto';
-import { Transfer } from './transfer.entity';
 
 @Injectable()
 export class TransferService {
@@ -33,7 +32,7 @@ export class TransferService {
     const user = await this.usersService.getUserById(user_id);
     const transaction = await this.transactionsService.createTransaction({
       transaction_group_id: transactiongroup.id,
-      session_id: 'ada',
+      // session_id:,
       source_system_name: source_system_name,
       user_id: user_id,
       user_first_name: user.first_name,
@@ -50,7 +49,7 @@ export class TransferService {
     const respone = await axios.post<ServerResponse>(
       'https://services.missilegroup.com/autotransfer-test/transfer',
       {
-        session: '00000000-0000-0000-0000-000000000000',
+        session: transaction.session_id,
         payer_bank: transaction.payer_bank_abbr,
         payer_account: transaction.payer_bank_account,
         payer_msisdn: transaction.payer_msisdn,

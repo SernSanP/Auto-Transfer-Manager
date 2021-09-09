@@ -29,15 +29,9 @@ export class User {
   @Column()
   is_blocked: boolean;
 
-  // @OneToMany(
-  //   (_type) => UsersSourceSystem,
-  //   (usersSourceSystem) => usersSourceSystem.user,
-  // )
-  // users: UsersSourceSystem[];
-
-  // @OneToMany(
-  //   (_type) => UsersSourceSystem,
-  //   (usersSourceSystem) => usersSourceSystem.createdUser,
-  // )
-  // createdUsers: UsersSourceSystem[];
+  @OneToMany(
+    (_type) => UsersSourceSystem,
+    (usersSourceSystem) => usersSourceSystem.user,
+  )
+  users: UsersSourceSystem[];
 }

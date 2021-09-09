@@ -14,16 +14,22 @@ import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user-dto';
 import { UpdateUserInfoDto } from './dto/update-user-info.dto';
-import { Roles } from 'src/Roles/roles.decorator';
-import { Role } from 'src/Roles/role.enum';
+import { RequiredRoles } from 'src/auth/roles/roles.decorator';
+import { Role } from 'src/auth/roles/role.enum';
 import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
+import { GetUser } from 'src/auth/get-relation.decorator';
 
 @Controller('users')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard(),RolesGuard)
 export class UsersController {
   constructor(private usersService: UsersService) {}
+  
   @Get()
-  getUsers(@Query() filterDto: GetUsersFilterDto): Promise<User[]> {
+  @RequiredRoles(Role.Authenticator,Role.Manager)
+  getUsers(
+    @Query() filterDto: GetUsersFilterDto,
+  ): Promise<User[]> {
     return this.usersService.getUsers(filterDto);
   }
 
