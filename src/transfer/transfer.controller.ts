@@ -8,7 +8,7 @@ import { TransferService } from './transfer.service';
 export class TransferController {
   constructor(private transferService: TransferService) {}
 
-  @Post()
+  @Post('create')
   createTransfer(
     @Body() data: any[],
     userID: string,
@@ -20,7 +20,7 @@ export class TransferController {
       source_system_name,
     );
   }
-  @Post()
+  @Post('start')
   startTransfer(@Body() data: StartTransferDto): Promise<ServerResponse> {
     return this.transferService.startTransfer(data);
   }
