@@ -34,16 +34,16 @@ export class Transaction {
   @Column()
   user_last_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_bank_abbr: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_bank_account: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_msisdn: string;
 
   @Column()
@@ -53,7 +53,7 @@ export class Transaction {
   payee_bank_account: string;
 
   @Column()
-  amount: number;
+  amount: string;
 
   @Column({ nullable: true })
   actual_amount: number;

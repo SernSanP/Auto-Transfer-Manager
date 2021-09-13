@@ -8,6 +8,7 @@ import { PayersService } from 'src/payers/payers.service';
 import { TransactionGroupsService } from 'src/transaction-groups/transaction-groups.service';
 import { TransactionsService } from 'src/transactions/transactions.service';
 import { UsersService } from 'src/users/users.service';
+import { CreateTransferDto } from './dto/createTranfer.dto';
 import { StartTransferDto } from './dto/startTransfer.dto';
 import { Transfer } from './transfer.entity';
 
@@ -19,18 +20,15 @@ export class TransferService {
     private usersService: UsersService,
     private payersService: PayersService,
   ) {}
-  async createTransfer(
-    data: any[],
-    userID: string,
-    source_system_name: string,
-  ) {
+  async createTransfer(createTransferDto: CreateTransferDto) {
+    console.log('createTranferDto: ', createTransferDto);
+    const { data, userID, source_system_name } = createTransferDto;
     const transactiongroup =
-      await this.transactionsGroupsService.createTransactionGroup({
-        is_running: false,
-      });
+      await this.transactionsGroupsService.createTransactionGroup({});
     const user = await this.usersService.getUserById(userID);
     for (let i = 0; i < data.length; i++) {
-      await this.transactionsService.createTransaction({
+      console.log(i);
+      let transaction = await this.transactionsService.createTransaction({
         transaction_group_id: transactiongroup.id,
         session_id: 'ada',
         source_system_name: source_system_name,
@@ -46,7 +44,9 @@ export class TransferService {
         amount: data[i][3],
         payee_name: data[i][1],
       });
+      console.log(transaction);
     }
+    return transactiongroup;
   }
   async startTransfer(data: StartTransferDto) {
     const { payer_id, transactionlist } = data;
@@ -61,7 +61,9 @@ export class TransferService {
         },
         transactionlist[i],
       );
-      let transaction = await this.transactionsService.getTransactionById(transactionlist[i])
+      let transaction = await this.transactionsService.getTransactionById(
+        transactionlist[i],
+      );
       try {
         let response = await axios.post<ServerResponse>(
           'https://services.missilegroup.com/autotransfer-test/transfer',
