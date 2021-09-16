@@ -1,9 +1,19 @@
+import { User } from 'src/users/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
 import { CreateTransactionDto } from './dto/createTransaction.dto';
 import { Transaction } from './transaction.entity';
 
 @EntityRepository(Transaction)
 export class TransactionsRepository extends Repository<Transaction> {
+  async getTransactions(
+    user:User,
+  ): Promise<Transaction[]>{
+    const query = this.createQueryBuilder('user')
+    query.where({user})
+    const transactions = await query.getMany();
+    return transactions
+  }
+  
   async createTransaction(
     createTransactionDto: CreateTransactionDto,
   ): Promise<Transaction> {

@@ -1,5 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { User } from 'src/users/user.entity';
+import { UpdateTransactionCallbackDto } from './dto/callBack.dto';
 import { CreateTransactionDto } from './dto/createTransaction.dto';
 import { UpdateTransactionPayerDto } from './dto/updateTransaction_Payer.dto';
 import { UpdateTransactionResponseDto } from './dto/updateTransaction_Response.dto';
@@ -23,8 +25,8 @@ export class TransactionsService {
     return this.transactionsRepository.findOneOrFail(id);
   }
 
-  getTransactions(): Promise<Transaction[]> {
-    return this.transactionsRepository.find();
+  getTransactions(user:User): Promise<Transaction[]> {
+    return this.transactionsRepository.getTransactions(user);
   }
 
   async updateTransaction_Payer(
