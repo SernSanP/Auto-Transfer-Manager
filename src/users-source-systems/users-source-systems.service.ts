@@ -15,9 +15,9 @@ export class UsersSourceSystemsService {
   ) {}
 
   getUsers(
-    filterDto: GetUsersSourceSystemFilterDto,
+    filterDto: GetUsersSourceSystemFilterDto,user:User
   ): Promise<UsersSourceSystem[]> {
-    return this.usersRepository.getUsers(filterDto);
+    return this.usersRepository.getUsers(filterDto,user);
   }
 
   async getUserById(id: string): Promise<UsersSourceSystem> {
@@ -37,9 +37,8 @@ export class UsersSourceSystemsService {
 
   async createUser(
     createUserSourceSystemDto: CreateUserSourceSystemDto,
-    user: User,
   ): Promise<UsersSourceSystem> {
-    return this.usersRepository.createUser(createUserSourceSystemDto, user);
+    return this.usersRepository.createUser(createUserSourceSystemDto);
   }
 
   async updateUserInfo(

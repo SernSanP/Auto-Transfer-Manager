@@ -18,8 +18,8 @@ import { TransferModule } from './transfer/transfer.module';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1234',
-      database: 'auto-tranfer-manager',
+      password: 'password',
+      database: 'auto-transfer-manager',
       autoLoadEntities: true,
       synchronize: true,
     }),
@@ -33,11 +33,11 @@ import { TransferModule } from './transfer/transfer.module';
     TransferModule,
     SourceSystemsModule,
   ],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    }
-  ]
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: RolesGuard,
+  //   }
+  // ]
 })
 export class AppModule {}

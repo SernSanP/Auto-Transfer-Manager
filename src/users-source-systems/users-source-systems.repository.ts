@@ -6,9 +6,13 @@ import { UsersSourceSystem } from './users-source-system.entity';
 
 @EntityRepository(UsersSourceSystem)
 export class UsersSourceSystemsRepository extends Repository<UsersSourceSystem> {
-  async getUsers(filterDto: GetUsersSourceSystemFilterDto): Promise<UsersSourceSystem[]> {
+  async getUsers(
+    filterDto: GetUsersSourceSystemFilterDto,
+    user: User,
+  ): Promise<UsersSourceSystem[]> {
     const { search, role, is_blocked } = filterDto;
     const query = this.createQueryBuilder('user');
+    query.where({ user });
     if (role) {
       query.andWhere('user.role = :role', { role });
     }
@@ -25,12 +29,13 @@ export class UsersSourceSystemsRepository extends Repository<UsersSourceSystem> 
     return users;
   }
 
-  async createUser(createUserSourceSystemDto: CreateUserSourceSystemDto, user: User): Promise<UsersSourceSystem> {
-    const { role } = createUserSourceSystemDto;
-    const { id } = user
+  async createUser(
+    createUserSourceSystemDto: CreateUserSourceSystemDto,
+  ): Promise<UsersSourceSystem> {
+    const { userId, source_system_name, role } = createUserSourceSystemDto;
     const new_user = this.create({
-      id,
-      source_system_name: 'SCB',
+      userId,
+      source_system_name,
       role,
       limit_balance_per_transaction: 0,
       limit_balance_per_day: 0,

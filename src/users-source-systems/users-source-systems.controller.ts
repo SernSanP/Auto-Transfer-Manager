@@ -26,12 +26,12 @@ export class UsersSourceSystemsController {
   @Get()
   getUsers(
     @Query() filterDto: GetUsersSourceSystemFilterDto,
-    // @GetUser() user: User,
+    @GetUser() user: User,
   ): Promise<UsersSourceSystem[]> {
     // if (!user.is_admin) {
     //   return;
     // }
-    return this.usersSourceSystemsService.getUsers(filterDto);
+    return this.usersSourceSystemsService.getUsers(filterDto,user);
   }
 
   @Get('/:id')
@@ -42,11 +42,9 @@ export class UsersSourceSystemsController {
   @Post()
   createUsers(
     @Body() createUserSourceSystemDto: CreateUserSourceSystemDto,
-    @GetUser() user: User,
   ): Promise<UsersSourceSystem> {
     return this.usersSourceSystemsService.createUser(
       createUserSourceSystemDto,
-      user,
     );
   }
 

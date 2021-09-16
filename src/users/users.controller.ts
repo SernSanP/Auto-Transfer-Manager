@@ -21,15 +21,13 @@ import { RolesGuard } from 'src/auth/roles/roles.guard';
 import { GetUser } from 'src/auth/get-relation.decorator';
 
 @Controller('users')
-@UseGuards(AuthGuard(),RolesGuard)
+// @UseGuards(AuthGuard())
 export class UsersController {
   constructor(private usersService: UsersService) {}
-  
+
   @Get()
-  @RequiredRoles(Role.Authenticator,Role.Manager)
-  getUsers(
-    @Query() filterDto: GetUsersFilterDto,
-  ): Promise<User[]> {
+  // @RequiredRoles(Role.Authenticator,Role.Manager)
+  getUsers(@Query() filterDto: GetUsersFilterDto): Promise<User[]> {
     return this.usersService.getUsers(filterDto);
   }
 
