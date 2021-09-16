@@ -28,9 +28,6 @@ export class UsersSourceSystemsController {
     @Query() filterDto: GetUsersSourceSystemFilterDto,
     @GetUser() user: User,
   ): Promise<UsersSourceSystem[]> {
-    // if (!user.is_admin) {
-    //   return;
-    // }
     return this.usersSourceSystemsService.getUsers(filterDto,user);
   }
 
