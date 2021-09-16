@@ -32,12 +32,15 @@ export class UsersService {
     return user;
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<void> {
+  async createUser(createUserDto: CreateUserDto): Promise<string> {
     return this.usersRepository.createUser(createUserDto);
   }
 
-  async updateUserInfo(id:string, updateUserInfoDto: UpdateUserInfoDto): Promise<User>{
-    const { email, first_name, last_name } = updateUserInfoDto
+  async updateUserInfo(
+    id: string,
+    updateUserInfoDto: UpdateUserInfoDto,
+  ): Promise<User> {
+    const { email, first_name, last_name } = updateUserInfoDto;
     const user = await this.getUserById(id);
     user.email = email;
     user.first_name = first_name;

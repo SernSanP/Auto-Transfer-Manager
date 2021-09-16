@@ -1,13 +1,18 @@
+import { User } from 'src/users/user.entity';
 import { EntityRepository, Repository } from 'typeorm';
-import { CreateUserDto } from './dto/create-user-dto';
-import { GetUsersFilterDto } from './dto/get-users-filter.dto';
+import { CreateUserSourceSystemDto } from './dto/create-user-source-system-dto';
+import { GetUsersSourceSystemFilterDto } from './dto/get-users-source-system-filter.dto';
 import { UsersSourceSystem } from './users-source-system.entity';
 
 @EntityRepository(UsersSourceSystem)
 export class UsersSourceSystemsRepository extends Repository<UsersSourceSystem> {
-  async getUsers(filterDto: GetUsersFilterDto): Promise<UsersSourceSystem[]> {
+  async getUsers(
+    filterDto: GetUsersSourceSystemFilterDto,
+    user: User,
+  ): Promise<UsersSourceSystem[]> {
     const { search, role, is_blocked } = filterDto;
     const query = this.createQueryBuilder('user');
+    query.where({ user });
     if (role) {
       query.andWhere('user.role = :role', { role });
     }
@@ -24,16 +29,19 @@ export class UsersSourceSystemsRepository extends Repository<UsersSourceSystem> 
     return users;
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<UsersSourceSystem> {
-    const { source_system_name, role } = createUserDto;
-    const user = this.create({
+  async createUser(
+    createUserSourceSystemDto: CreateUserSourceSystemDto,
+  ): Promise<UsersSourceSystem> {
+    const { userId, source_system_name, role } = createUserSourceSystemDto;
+    const new_user = this.create({
+      userId,
       source_system_name,
       role,
       limit_balance_per_transaction: 0,
       limit_balance_per_day: 0,
       is_blocked: false,
     });
-    await this.save(user);
-    return user;
+    await this.save(new_user);
+    return new_user;
   }
 }

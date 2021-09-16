@@ -6,23 +6,26 @@ import { AuthModule } from './auth/auth.module';
 import { TransactionsModule } from './transactions/transactions.module';
 import { TransactionGroupsModule } from './transaction-groups/transaction-groups.module';
 import { PayersModule } from './payers/payers.module';
-import { TransferModule } from './transfer/transfer.module';
 import { SourceSystemsModule } from './source-systems/source-systems.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RolesGuard } from './auth/roles/roles.guard';
+import { TransferModule } from './transfer/transfer.module';
 
 @Module({
   imports: [
-    UsersModule,
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
       port: 5432,
       username: 'postgres',
       password: 'password',
-      database: 'auto',
+      database: 'auto-transfer-manager',
       autoLoadEntities: true,
       synchronize: true,
     }),
+    UsersModule,
     UsersSourceSystemsModule,
+    SourceSystemsModule,
     AuthModule,
     TransactionGroupsModule,
     PayersModule,
@@ -30,5 +33,11 @@ import { SourceSystemsModule } from './source-systems/source-systems.module';
     TransferModule,
     SourceSystemsModule,
   ],
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: RolesGuard,
+  //   }
+  // ]
 })
 export class AppModule {}

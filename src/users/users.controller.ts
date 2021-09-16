@@ -7,17 +7,26 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { GetUsersFilterDto } from './dto/get-users-filter.dto';
 import { User } from './user.entity';
 import { CreateUserDto } from './dto/create-user-dto';
 import { UpdateUserInfoDto } from './dto/update-user-info.dto';
+import { RequiredRoles } from 'src/auth/roles/roles.decorator';
+import { Role } from 'src/auth/roles/role.enum';
+import { AuthGuard } from '@nestjs/passport';
+import { RolesGuard } from 'src/auth/roles/roles.guard';
+import { GetUser } from 'src/auth/get-relation.decorator';
 
 @Controller('users')
+// @UseGuards(AuthGuard())
 export class UsersController {
   constructor(private usersService: UsersService) {}
+
   @Get()
+  // @RequiredRoles(Role.Authenticator,Role.Manager)
   getUsers(@Query() filterDto: GetUsersFilterDto): Promise<User[]> {
     return this.usersService.getUsers(filterDto);
   }
@@ -28,7 +37,7 @@ export class UsersController {
   }
 
   @Post()
-  createUsers(@Body() createUserDto: CreateUserDto): Promise<void> {
+  createUsers(@Body() createUserDto: CreateUserDto): Promise<string> {
     return this.usersService.createUser(createUserDto);
   }
 

@@ -1,4 +1,9 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { UsersSourceSystem } from 'src/users-source-systems/users-source-system.entity';
 
 @Entity()
@@ -6,7 +11,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
@@ -24,6 +29,9 @@ export class User {
   @Column()
   is_blocked: boolean;
 
-  @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.user)
-  usersSourceSystems: UsersSourceSystem[];
+  @OneToMany(
+    (_type) => UsersSourceSystem,
+    (usersSourceSystem) => usersSourceSystem.user,
+  )
+  users: UsersSourceSystem[];
 }

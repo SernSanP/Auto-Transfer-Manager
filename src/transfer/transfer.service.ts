@@ -1,15 +1,10 @@
-import {
-  ForbiddenException,
-  Injectable,
-  UnprocessableEntityException,
-} from '@nestjs/common';
-import axios, { AxiosResponse } from 'axios';
+import { Injectable } from '@nestjs/common';
+import axios from 'axios';
 import { PayersService } from 'src/payers/payers.service';
 import { TransactionGroupsService } from 'src/transaction-groups/transaction-groups.service';
 import { TransactionsService } from 'src/transactions/transactions.service';
 import { UsersService } from 'src/users/users.service';
 import { CreateTransferDto } from './dto/createTransfer.dto';
-import { Transfer } from './transfer.entity';
 
 @Injectable()
 export class TransferService {
@@ -37,7 +32,7 @@ export class TransferService {
     const user = await this.usersService.getUserById(user_id);
     const transaction = await this.transactionsService.createTransaction({
       transaction_group_id: transactiongroup.id,
-      session_id: 'ada',
+      // session_id:,
       source_system_name: source_system_name,
       user_id: user_id,
       user_first_name: user.first_name,
@@ -51,18 +46,22 @@ export class TransferService {
       amount,
       payee_name,
     });
-    try {
-      const response = await axios.post<ServerResponse>(
-        'https://services.missilegroup.com/autotransfer-test/transfer',
-        {
-          session: '00000000-0000-0000-0000-000000000000',
-          payer_bank: transaction.payer_bank_abbr,
-          payer_account: transaction.payer_bank_account,
-          payer_msisdn: transaction.payer_msisdn,
-          payee_bank: transaction.payee_bank_abbr,
-          payee_account: transaction.payee_bank_account,
-          amount: transaction.amount,
-          callback_url: 'http://127.0.0.1:4040',
+    const respone = await axios.post<ServerResponse>(
+      'https://services.missilegroup.com/autotransfer-test/transfer',
+      {
+        session: transaction.session_id,
+        payer_bank: transaction.payer_bank_abbr,
+        payer_account: transaction.payer_bank_account,
+        payer_msisdn: transaction.payer_msisdn,
+        payee_bank: transaction.payee_bank_abbr,
+        payee_account: transaction.payee_bank_account,
+        amount: transaction.amount,
+        callback_url: 'http://28a0-2403-6200-8821-ff5d-4db7-c125-58df-914f.ngrok.io/transfer/callback',
+      },
+      {
+        headers: {
+          apikey: '013ba1c9-6cb2-4891-a523-950a25d1a712',
+          ['source-system-name']: transaction.source_system_name,
         },
         {
           headers: {
@@ -92,5 +91,19 @@ export class TransferService {
         throw new UnprocessableEntityException();
       }
     }
+  }
+
+  async callbackTranfer(callbackTranferInterface: CallbackTranfer) {
+    const { status, data } = callbackTranferInterface;
+    this.transactionsService.updateTransactionCallback(
+      {
+        actual_amount: data.unique_amount,
+        response_payee_name: data.response_payee_name,
+        status_code: status.code,
+        status_type: status.type,
+        status_message: status.message,
+      },
+      data.transaction_id,
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { UsersSourceSystem } from 'src/users-source-systems/users-source-system.entity';
-import { Column, Entity, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class SourceSystem {
@@ -14,4 +14,6 @@ export class SourceSystem {
 
   @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.sourceSystem)
   usersSourceSystems: UsersSourceSystem[];
+  @JoinColumn({ name: 'source_system_name' })
+  sourceSystems: UsersSourceSystem[];
 }

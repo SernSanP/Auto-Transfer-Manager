@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateUserDto } from './dto/create-user-dto';
-import { GetUsersFilterDto } from './dto/get-users-filter.dto';
-import { UpdateUserInfoDto } from './dto/update-user-info.dto';
+import { User } from 'src/users/user.entity';
+import { CreateUserSourceSystemDto } from './dto/create-user-source-system-dto';
+import { GetUsersSourceSystemFilterDto } from './dto/get-users-source-system-filter.dto';
+import { UpdateUserInfoDto } from './dto/update-user-source-system.dto';
 import { UsersSourceSystem } from './users-source-system.entity';
 import { UsersSourceSystemsRepository } from './users-source-systems.repository';
 
@@ -13,8 +14,10 @@ export class UsersSourceSystemsService {
     private usersRepository: UsersSourceSystemsRepository,
   ) {}
 
-  getUsers(filterDto: GetUsersFilterDto): Promise<UsersSourceSystem[]> {
-    return this.usersRepository.getUsers(filterDto);
+  getUsers(
+    filterDto: GetUsersSourceSystemFilterDto,user:User
+  ): Promise<UsersSourceSystem[]> {
+    return this.usersRepository.getUsers(filterDto,user);
   }
 
   async getUserById(id: string): Promise<UsersSourceSystem> {
@@ -32,12 +35,21 @@ export class UsersSourceSystemsService {
     return user;
   }
 
-  async createUser(createUserDto: CreateUserDto): Promise<UsersSourceSystem> {
-    return this.usersRepository.createUser(createUserDto);
+  async createUser(
+    createUserSourceSystemDto: CreateUserSourceSystemDto,
+  ): Promise<UsersSourceSystem> {
+    return this.usersRepository.createUser(createUserSourceSystemDto);
   }
 
-  async updateUserInfo(id:string, updateUserInfoDto: UpdateUserInfoDto): Promise<UsersSourceSystem>{
-    const { source_system_name, limit_balance_per_transaction, limit_balance_per_day } = updateUserInfoDto
+  async updateUserInfo(
+    id: string,
+    updateUserInfoDto: UpdateUserInfoDto,
+  ): Promise<UsersSourceSystem> {
+    const {
+      source_system_name,
+      limit_balance_per_transaction,
+      limit_balance_per_day,
+    } = updateUserInfoDto;
     const user = await this.getUserById(id);
     user.source_system_name = source_system_name;
     user.limit_balance_per_transaction = limit_balance_per_transaction;
