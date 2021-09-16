@@ -11,9 +11,6 @@ export class CreateTransactionDto {
   transaction_group_id: string;
 
   @IsNotEmpty()
-  session_id: string;
-
-  @IsNotEmpty()
   source_system_name: string;
 
   @IsNotEmpty()

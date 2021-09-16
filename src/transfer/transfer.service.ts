@@ -30,7 +30,6 @@ export class TransferService {
       console.log(i);
       let transaction = await this.transactionsService.createTransaction({
         transaction_group_id: transactiongroup.id,
-        session_id: 'ada',
         source_system_name: source_system_name,
         user_id: user.id,
         user_first_name: user.first_name,
@@ -68,7 +67,7 @@ export class TransferService {
         let response = await axios.post<ServerResponse>(
           'https://services.missilegroup.com/autotransfer-test/transfer',
           {
-            session: '00000000-0000-0000-0000-000000000000',
+            session: transaction.session_id,
             payer_bank: transaction.payer_bank_abbr,
             payer_account: transaction.payer_bank_account,
             payer_msisdn: transaction.payer_msisdn,
