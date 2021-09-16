@@ -23,15 +23,6 @@ export class CreateTransactionDto {
   @IsNotEmpty()
   user_last_name: string;
 
-  @IsString()
-  payer_id: string;
-
-  payer_bank_abbr: string;
-
-  payer_bank_account: string;
-
-  payer_msisdn: string;
-
   @IsNotEmpty()
   payee_bank_abbr: string;
 
@@ -39,8 +30,7 @@ export class CreateTransactionDto {
   payee_bank_account: string;
 
   @IsNotEmpty()
-  @IsNumber()
-  amount: number;
+  amount: string;
 
   @IsNotEmpty()
   payee_name: string;

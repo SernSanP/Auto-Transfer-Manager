@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CreateTransactionDto } from './dto/createTransaction.dto';
-import {
-  UpdateTransactionCallbackDto,
-  UpdateTransactionDto,
-} from './dto/updateTransaction.dto';
+import { UpdateTransactionPayerDto } from './dto/updateTransaction_Payer.dto';
+import { UpdateTransactionResponseDto } from './dto/updateTransaction_Response.dto';
 import { Transaction } from './transaction.entity';
 import { TransactionsRepository } from './transactions.repository';
 
@@ -29,13 +27,28 @@ export class TransactionsService {
     return this.transactionsRepository.find();
   }
 
-  async updateTransaction(
-    updateTransactionDto: UpdateTransactionDto,
+  async updateTransaction_Payer(
+    updateTransactionPayerDto: UpdateTransactionPayerDto,
+    id: string,
+  ): Promise<Transaction> {
+    const transaction = await this.transactionsRepository.findOneOrFail(id);
+    const { payer_id, payer_bank_abbr, payer_bank_account, payer_msisdn } =
+      updateTransactionPayerDto;
+    transaction.payer_id = payer_id;
+    transaction.payer_bank_abbr = payer_bank_abbr;
+    transaction.payer_bank_account = payer_bank_account;
+    transaction.payer_msisdn = payer_msisdn;
+    await this.transactionsRepository.update(id, transaction);
+    return transaction;
+  }
+
+  async updateTransaction_Response(
+    updateTransactionResponseDto: UpdateTransactionResponseDto,
     id: string,
   ): Promise<Transaction> {
     const transaction = await this.transactionsRepository.findOneOrFail(id);
     const { api_transaction_id, status_code, status_type, status_message } =
-      updateTransactionDto;
+      updateTransactionResponseDto;
     transaction.api_transaction_id = api_transaction_id;
     transaction.status_code = status_code;
     transaction.status_type = status_type;

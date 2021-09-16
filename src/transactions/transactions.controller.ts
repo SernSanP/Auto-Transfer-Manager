@@ -1,6 +1,15 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { CreateTransactionDto } from './dto/createTransaction.dto';
-import { UpdateTransactionDto } from './dto/updateTransaction.dto';
+import { UpdateTransactionPayerDto } from './dto/updateTransaction_Payer.dto';
+import { UpdateTransactionResponseDto } from './dto/updateTransaction_Response.dto';
 import { Transaction } from './transaction.entity';
 import { TransactionsService } from './transactions.service';
 
@@ -26,12 +35,23 @@ export class TransactionsController {
   }
 
   @Patch('/:id')
-  updateTransaction(
+  updateTransaction_Payer(
     @Param('id') id: string,
-    @Body() updateTransactionDto: UpdateTransactionDto,
+    @Body() updateTransactionPayerDto: UpdateTransactionPayerDto,
   ): Promise<Transaction> {
-    return this.transactionsService.updateTransaction(
-      updateTransactionDto,
+    return this.transactionsService.updateTransaction_Payer(
+      updateTransactionPayerDto,
+      id,
+    );
+  }
+
+  @Patch('/:id')
+  updateTransaction_Response(
+    @Param('id') id: string,
+    @Body() updateTransactionResponseDto: UpdateTransactionResponseDto,
+  ): Promise<Transaction> {
+    return this.transactionsService.updateTransaction_Response(
+      updateTransactionResponseDto,
       id,
     );
   }

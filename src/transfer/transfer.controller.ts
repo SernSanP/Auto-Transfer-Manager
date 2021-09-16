@@ -1,7 +1,8 @@
 import { Body, Controller, NotFoundException, Post } from '@nestjs/common';
 import { CallTracker } from 'assert';
 import { getBankFromAbbr } from './bank';
-import { CreateTransferDto } from './dto/createTransfer.dto';
+import { CreateTransferDto } from './dto/createTranfer.dto';
+import { StartTransferDto } from './dto/startTransfer.dto';
 import { Transfer } from './transfer.entity';
 import { TransferService } from './transfer.service';
 
@@ -9,23 +10,18 @@ import { TransferService } from './transfer.service';
 export class TransferController {
   constructor(private transferService: TransferService) {}
 
-  @Post()
-  createTransfer(
-    @Body() createTransferDto: CreateTransferDto,
-  ): Promise<ServerResponse> {
-    const { payee_bank_abbr } = createTransferDto;
-    const res = getBankFromAbbr(payee_bank_abbr);
-    if (!res) {
-      throw new NotFoundException();
-    }
+  @Post('/create')
+  createTransfer(@Body() createTransferDto: CreateTransferDto) {
     return this.transferService.createTransfer(createTransferDto);
   }
+  
+  @Post('/start')
+  startTransfer(@Body() data: StartTransferDto): Promise<ServerResponse> {
+    return this.transferService.startTransfer(data);
+  }
 
-  @Post('/callback')
-  callbackTranfer(
-    @Body() callbackTranferInterface:CallbackTranfer
-  ): void{
-    console.log(callbackTranferInterface)
-    this.transferService.callbackTranfer(callbackTranferInterface)
+  @Post('/test')
+  testTransfer(@Body() data: any) {
+    console.log(data);
   }
 }

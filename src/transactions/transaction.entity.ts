@@ -17,6 +17,7 @@ export class Transaction {
   @Column()
   transaction_group_id: string;
 
+  @Generated("uuid")
   @Column()
   @Generated('uuid')
   session_id: string;
@@ -36,16 +37,16 @@ export class Transaction {
   @Column()
   user_last_name: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_id: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_bank_abbr: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_bank_account: string;
 
-  @Column()
+  @Column({ nullable: true })
   payer_msisdn: string;
 
   @Column()
@@ -54,8 +55,8 @@ export class Transaction {
   @Column()
   payee_bank_account: string;
 
-  @Column({ type: 'float' })
-  amount: number;
+  @Column()
+  amount: string;
 
   @Column({ nullable: true, type: 'float' }, )
   actual_amount: number;

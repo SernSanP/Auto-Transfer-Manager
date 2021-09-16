@@ -9,15 +9,10 @@ export class TransactionsRepository extends Repository<Transaction> {
   ): Promise<Transaction> {
     const {
       transaction_group_id,
-      // session_id,
       source_system_name,
       user_id,
       user_first_name,
       user_last_name,
-      payer_id,
-      payer_bank_abbr,
-      payer_bank_account,
-      payer_msisdn,
       payee_bank_abbr,
       payee_bank_account,
       amount,
@@ -25,15 +20,10 @@ export class TransactionsRepository extends Repository<Transaction> {
     } = createTransactionDto;
     const transaction = this.create({
       transaction_group_id,
-      // session_id,
       source_system_name,
       user_id,
       user_first_name,
       user_last_name,
-      payer_id,
-      payer_bank_abbr,
-      payer_bank_account,
-      payer_msisdn,
       payee_bank_abbr,
       payee_bank_account,
       amount,

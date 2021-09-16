@@ -15,10 +15,13 @@ export class TransactionGroup {
   @Column()
   is_running: boolean;
 
-  @OneToMany(
-    () => Transaction,
-    transaction => transaction.transactiongroup,
-  )
+  @OneToMany(() => Transaction, (transaction) => transaction.transactiongroup)
   @JoinColumn({ name: 'id' })
   transaction: Transaction[];
+
+  @Column({ nullable: true })
+  begin_tranferred_at: Date;
+
+  @Column({ nullable: true })
+  end_tranferred_at: Date;
 }
