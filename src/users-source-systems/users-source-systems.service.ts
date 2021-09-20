@@ -20,6 +20,11 @@ export class UsersSourceSystemsService {
     return this.usersRepository.getUsers(filterDto,user);
   }
 
+  // getUsers(
+  //   filterDto: GetUsersSourceSystemFilterDto,user:User
+  // ): Promise<UsersSourceSystem[]> {
+  //   return this.usersRepository.find();
+  // }
   async getUserById(id: string): Promise<UsersSourceSystem> {
     const found = await this.usersRepository.findOne(id);
     if (!found) {

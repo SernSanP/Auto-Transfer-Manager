@@ -7,6 +7,7 @@ import { UpdateTransactionPayerDto } from './dto/updateTransaction_Payer.dto';
 import { UpdateTransactionResponseDto } from './dto/updateTransaction_Response.dto';
 import { Transaction } from './transaction.entity';
 import { TransactionsRepository } from './transactions.repository';
+import { GetTransactionsFilterDto } from './dto/getTransactionsFilter.dto'
 
 @Injectable()
 export class TransactionsService {
@@ -25,10 +26,10 @@ export class TransactionsService {
     return this.transactionsRepository.findOneOrFail(id);
   }
 
-  getTransactions(user:User): Promise<Transaction[]> {
-    return this.transactionsRepository.getTransactions(user);
+  getTransactions(filterdto:GetTransactionsFilterDto,user:User): Promise<Transaction[]> {
+    return this.transactionsRepository.getTransactions(filterdto,user);
   }
-
+  
   async updateTransaction_Payer(
     updateTransactionPayerDto: UpdateTransactionPayerDto,
     id: string,

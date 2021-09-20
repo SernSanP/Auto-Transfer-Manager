@@ -14,9 +14,8 @@ import { Exclude } from 'class-transformer';
 export class UsersSourceSystem {
   @PrimaryColumn()
   userId: string;
-  @ManyToOne((_type) => User, (user) => user.users, { eager: false })
+  @ManyToOne((_type) => User, (user) => user.users,)
   @JoinColumn({ name: 'userId' ,referencedColumnName: 'id'})
-  @Exclude({ toPlainOnly: true })
   user: User;
 
   @PrimaryColumn()
@@ -24,10 +23,8 @@ export class UsersSourceSystem {
   @ManyToOne(
     (_type) => SourceSystem,
     (sourceSystem) => sourceSystem.sourceSystems,
-    { eager: false },
   )
   @JoinColumn({ name: 'source_system_name' ,referencedColumnName: 'source_system_name'})
-  @Exclude({ toPlainOnly: true })
   sourceSystem: SourceSystem;
 
   @Column()

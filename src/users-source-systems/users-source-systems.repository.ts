@@ -12,7 +12,8 @@ export class UsersSourceSystemsRepository extends Repository<UsersSourceSystem> 
   ): Promise<UsersSourceSystem[]> {
     const { search, role, is_blocked } = filterDto;
     const query = this.createQueryBuilder('user');
-    query.where({ user });
+    const { id:  userId} = user;
+    query.where({ userId });
     if (role) {
       query.andWhere('user.role = :role', { role });
     }

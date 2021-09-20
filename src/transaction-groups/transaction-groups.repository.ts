@@ -10,6 +10,7 @@ export class TransactionGroupsRepository extends Repository<TransactionGroup> {
     const {} = createTransactionGroupDto;
     const transactiongroup = this.create({
       is_running: false,
+      created_at:new Date
     });
     await this.save(transactiongroup);
     return transactiongroup;

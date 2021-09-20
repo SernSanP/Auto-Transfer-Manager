@@ -13,7 +13,5 @@ export class SourceSystem {
   is_disabled: boolean;
 
   @OneToMany((_type) => UsersSourceSystem, (usersSourceSystem) => usersSourceSystem.sourceSystem)
-  usersSourceSystems: UsersSourceSystem[];
-  @JoinColumn({ name: 'source_system_name' })
   sourceSystems: UsersSourceSystem[];
 }

@@ -59,6 +59,7 @@ export class TransferService {
       let transaction = await this.transactionsService.getTransactionById(
         transactionlist[i],
       );
+      console.log('data',data)
       try {
         let response = await axios.post<ServerResponse>(
           'https://services.missilegroup.com/autotransfer-test/transfer',
@@ -70,7 +71,7 @@ export class TransferService {
             payee_bank: transaction.payee_bank_abbr,
             payee_account: transaction.payee_bank_account,
             amount: transaction.amount,
-            callback_url: 'http://127.0.0.1:4040',
+            callback_url: 'http://localhost:5000/callback',
           },
           {
             headers: {
@@ -92,7 +93,7 @@ export class TransferService {
         return response.data;
       } catch (error) {
         // console.log(error.response.status);
-        // console.log(error.response.data);
+        console.log(error.response.data);
         if (error.response.status == 403) {
           throw new ForbiddenException();
         }

@@ -10,9 +10,11 @@ import {
 
 @EntityRepository(User)
 export class UsersRepository extends Repository<User> {
-  async getUsers(filterDto: GetUsersFilterDto): Promise<User[]> {
+  async getUsers(filterDto: GetUsersFilterDto, user: User): Promise<User[]> {
     const { search, is_admin, is_blocked } = filterDto;
     const query = this.createQueryBuilder('user');
+    const { id } = user;
+    query.where({ id });
     if (is_admin) {
       query.andWhere('user.is_admin = :is_admin', { is_admin });
     }

@@ -24,4 +24,7 @@ export class TransactionGroup {
 
   @Column({ nullable: true })
   end_tranferred_at: Date;
+
+  @Column()
+  created_at: Date;
 }

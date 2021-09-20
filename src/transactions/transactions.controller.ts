@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
@@ -16,9 +17,9 @@ import { UpdateTransactionPayerDto } from './dto/updateTransaction_Payer.dto';
 import { UpdateTransactionResponseDto } from './dto/updateTransaction_Response.dto';
 import { Transaction } from './transaction.entity';
 import { TransactionsService } from './transactions.service';
-
+import { GetTransactionsFilterDto } from './dto/getTransactionsFilter.dto';
 @Controller('transactions')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard('jwt'))
 export class TransactionsController {
   constructor(private transactionsService: TransactionsService) {}
 
@@ -35,8 +36,11 @@ export class TransactionsController {
   }
 
   @Get()
-  getTransaction(@GetUser() user:User,): Promise<Transaction[]> {
-    return this.transactionsService.getTransactions(user);
+  getTransaction(
+    @Query() filterDto: GetTransactionsFilterDto,
+    @GetUser() user: User,
+  ): Promise<Transaction[]> {
+    return this.transactionsService.getTransactions(filterDto, user);
   }
 
   @Patch('/:id')
@@ -66,4 +70,3 @@ export class TransactionsController {
     return this.transactionsService.deleteTransaction(id);
   }
 }
-

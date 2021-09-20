@@ -20,7 +20,7 @@ import { User } from 'src/users/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users-source-systems')
-@UseGuards(AuthGuard())
+@UseGuards(AuthGuard('jwt'))
 export class UsersSourceSystemsController {
   constructor(private usersSourceSystemsService: UsersSourceSystemsService) {}
   @Get()

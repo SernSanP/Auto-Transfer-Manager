@@ -13,8 +13,8 @@ export class UsersService {
     private usersRepository: UsersRepository,
   ) {}
 
-  getUsers(filterDto: GetUsersFilterDto): Promise<User[]> {
-    return this.usersRepository.getUsers(filterDto);
+  getUsers(filterDto: GetUsersFilterDto,user:User): Promise<User[]> {
+    return this.usersRepository.getUsers(filterDto,user);
   }
 
   async getUserById(id: string): Promise<User> {

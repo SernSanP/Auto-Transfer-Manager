@@ -1,4 +1,5 @@
 import { Body, Controller, NotFoundException, Post } from '@nestjs/common';
+import { AuthGuard } from '@nestjs/passport';
 import { CallTracker } from 'assert';
 import { getBankFromAbbr } from './bank';
 import { CreateTransferDto } from './dto/createTranfer.dto';
@@ -25,3 +26,4 @@ export class TransferController {
     console.log(data);
   }
 }
+
