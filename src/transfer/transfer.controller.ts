@@ -17,13 +17,22 @@ export class TransferController {
   }
   
   @Post('/start')
-  startTransfer(@Body() data: StartTransferDto): Promise<ServerResponse> {
-    return this.transferService.startTransfer(data);
+  startTransfer(@Body() data: StartTransferDto) {
+    this.transferService.startTransfer(data);
+    return 'OK';
   }
 
   @Post('/test')
   testTransfer(@Body() data: any) {
     console.log(data);
+  }
+
+  @Post('/callback')
+  callbackTranfer(
+    @Body() callbackTranferInterface:CallbackTranfer
+  ): void{
+    console.log(callbackTranferInterface)
+    this.transferService.callbackTranfer(callbackTranferInterface)
   }
 }
 

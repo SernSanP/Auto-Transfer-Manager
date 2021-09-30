@@ -56,7 +56,7 @@ export class Transaction {
   payee_bank_account: string;
 
   @Column()
-  amount: string;
+  amount: number;
 
   @Column({ nullable: true, type: 'float' }, )
   actual_amount: number;
@@ -85,6 +85,9 @@ export class Transaction {
   @Column()
   is_deleted: boolean;
 
+  @Column()
+  created_at: Date;
+
   @ManyToOne(
     () => TransactionGroup,
     (transactiongroup) => transactiongroup.transaction,
@@ -95,4 +98,5 @@ export class Transaction {
   @ManyToOne(() => Payer, (Payer) => Payer.transaction)
   @JoinColumn({ name: 'payer_id' })
   payer: Payer;
+
 }

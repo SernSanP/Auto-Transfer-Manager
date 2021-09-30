@@ -54,6 +54,7 @@ export class TransactionsRepository extends Repository<Transaction> {
       payee_bank_account,
       amount,
       payee_name,
+      created_at: new Date,
       is_deleted: false,
     });
     await this.save(transaction);

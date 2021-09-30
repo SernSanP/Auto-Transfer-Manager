@@ -30,9 +30,8 @@ export class CreateTransactionDto {
   payee_bank_account: string;
 
   @IsNotEmpty()
-  amount: string;
+  amount: number;
 
   @IsNotEmpty()
   payee_name: string;
-
 }
