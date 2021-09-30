@@ -16,6 +16,9 @@ export class Payer {
   created_user_id: string;
 
   @Column()
+  payer_name: string;
+
+  @Column()
   source_system_name: string;
 
   @Column()

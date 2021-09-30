@@ -7,6 +7,7 @@ export class PayersRepository extends Repository<Payer> {
   async createPayer(createPayerDto: CreatePayerDto): Promise<Payer> {
     const {
       created_user_id,
+      payer_name,
       source_system_name,
       payer_bank_abbr,
       payer_bank_account,
@@ -15,6 +16,7 @@ export class PayersRepository extends Repository<Payer> {
 
     const payer = this.create({
       created_user_id,
+      payer_name,
       source_system_name,
       payer_bank_abbr,
       payer_bank_account,

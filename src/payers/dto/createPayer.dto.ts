@@ -5,6 +5,10 @@ export class CreatePayerDto {
   @IsString()
   created_user_id: string;
 
+  @IsString()
+  @IsNotEmpty()
+  payer_name: string;
+
   @IsNotEmpty()
   source_system_name: string;
 

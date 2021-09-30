@@ -1,12 +1,8 @@
 import { IsBoolean, IsInt, IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdatePayerDto {
-  @IsNotEmpty()
   @IsString()
-  created_user_id: string;
-
-  @IsNotEmpty()
-  source_system_name: string;
+  payer_name: string;
 
   @IsNotEmpty()
   payer_bank_abbr: string;

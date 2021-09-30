@@ -10,7 +10,7 @@ export class PayersService {
   constructor(
     @InjectRepository(PayersRepository)
     private payersRepository: PayersRepository,
-  ) {}
+  ) { }
 
   createPayer(createPayerDto: CreatePayerDto): Promise<Payer> {
     return this.payersRepository.createPayer(createPayerDto);
@@ -30,15 +30,13 @@ export class PayersService {
   ): Promise<Payer> {
     const payer = await this.payersRepository.findOneOrFail(id);
     const {
-      created_user_id,
-      source_system_name,
+      payer_name,
       payer_bank_abbr,
       payer_bank_account,
       payer_msisdn,
       is_disabled,
     } = updatePayerDto;
-    payer.created_user_id = created_user_id;
-    payer.source_system_name = source_system_name;
+    payer.payer_name = payer_name
     payer.payer_bank_abbr = payer_bank_abbr;
     payer.payer_bank_account = payer_bank_account;
     payer.payer_msisdn = payer_msisdn;

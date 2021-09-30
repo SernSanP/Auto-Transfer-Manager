@@ -16,7 +16,7 @@ import { PayersService } from './payers.service';
 
 @Controller('payers')
 export class PayersController {
-  constructor(private payersService: PayersService) {}
+  constructor(private payersService: PayersService) { }
 
   @Post()
   createPayer(@Body() createPayerDto: CreatePayerDto): Promise<Payer> {
@@ -43,8 +43,18 @@ export class PayersController {
     @Param('id') id: string,
     @Body() updatePayerDto: UpdatePayerDto,
   ): Promise<Payer> {
+    console.log(updatePayerDto)
     return this.payersService.updatePayer(updatePayerDto, id);
   }
+
+  // @Patch('/:id')
+  // updatePayer(
+  //   @Param('id') id: string,
+  //   @Body() updatePayerDto: any,
+  // ): Promise<Payer> {
+  //   console.log(updatePayerDto)
+  //   return null;
+  // }
 
   @Delete('/:id')
   deletePayer(@Param('id') id: string): Promise<void> {
